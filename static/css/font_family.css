@@ -47,3 +47,10 @@ font-size: 20px;
 .my-description {
 display: inline-block;
 }
+
+.cover-img {
+  background-image: url('/static/img/test3k.jpg');
+  max-width: auto;
+  height: 100%;
+  background-size: cover;
+}
