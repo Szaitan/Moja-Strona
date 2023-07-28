@@ -54,3 +54,7 @@ display: inline-block;
   height: 100%;
   background-size: cover;
 }
+
+.intro-message {
+ color: #f5f3f0;
+}

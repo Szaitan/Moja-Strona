@@ -6,21 +6,23 @@ from bs4 import BeautifulSoup
 import smtplib
 import os
 from email.mime.text import MIMEText
+import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("flask_app")
 Bootstrap(app)
 ckeditor = CKEditor(app)
+this_year = datetime.datetime.now().year
 
 
 @app.route("/", methods=["GET"])
 def cover_page():
-    return render_template("cover.html")
+    return render_template("cover.html", this_year=this_year)
 
 
 @app.route("/about-me", methods=["GET"])
 def about_me_page():
-    return render_template("about-me.html")
+    return render_template("about-me.html", this_year=this_year)
 
 
 @app.route("/contact-me", methods=["GET", "POST"])
@@ -52,8 +54,8 @@ def contact_me_page():
             connection.sendmail(from_addr=os.environ.get("my_mail"), to_addrs=os.environ.get("my_mail"),
                                 msg=msg.as_string())
         flash('Your message has been sent. Thank you!', 'success')
-        return redirect(url_for('contact_me_page'))
-    return render_template("contact.html", form=form)
+        return redirect(url_for('contact_me_page', this_year=this_year))
+    return render_template("contact.html", form=form, this_year=this_year)
 
 
 if __name__ == "__main__":
